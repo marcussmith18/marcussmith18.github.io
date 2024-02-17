@@ -1,15 +1,15 @@
 ---
-title: "YOUR NAME" 
-about:
+title: "Marcus Smith" 
+about: 
   template: trestles  # jolla  trestles  solana  marquee  broadside
-  image: img/profile.png
+  image: img\SAT Pic.png
   image-width: 16em
   image-shape: round # rectangle  round  rounded
   
   links:
     - icon: linkedin
       text: LinkedIn
-      href: https://linkedin.com
+      href: https://www.linkedin.com/in/marcussmith280/
     - icon: instagram
       text: Instagram
       href: https://instagram.com
@@ -18,24 +18,20 @@ about:
       href: https://github.com
     - icon: file-earmark-pdf
       text: Resumé
-      href: https://GITHUB_USERNAME.github.io/resume-example.pdf
+      href: C:\Users\Marcus\Documents\marcussmith18.github.io\Resume .pdf
     - icon: mailbox
       text: Email
-      href: mailto:YOUR_EMAIL@geneseo.edu
-
+      href: mailto:mhs9@geneseo.edu
 ---
 
-
-Finley Malloc majors in Data Analytics at SUNY Geneseo. When not working on data analytics, Finley enjoys spending time unicycling and playing with her pet iguana.
+Marcus Smith majors in Accounting at SUNY Geneseo. When not working on accounting, Marcus enjoys spending time biking, skiing, hiking, and gardening.
 
 ## Education
 
-State University of New York at Geneseo | Geneseo, NY <br>
-B.S. in Data Analytics | Aug 2022 - May 2026 <br>
-Minor in Business Administration 
+Finger Lakes Community College \| Canandaigua, NY <br> A.S. Business Administration \| Aug 2021 - May 2023
+
+State University of New York at Geneseo \| Geneseo, NY <br> B.S. Accounting \| Jan 2024 - Dec 2025
 
 ## Experience
 
-Starbucks Analytics | Data Analyst Intern | May 2024 - Aug 2024
-
-
+Wegmans Food Markets Inc. \| Store Associate \| Jan. 2022 - present
