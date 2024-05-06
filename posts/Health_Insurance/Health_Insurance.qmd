@@ -1,9 +1,9 @@
 ---
-title: "Starwars"
-author: "Your Name"
-date: "2023-10-30"
-categories: [starwars, code, analysis]
-image: "image.png"
+title: "Health Insurance"
+author: "Marcus Smith"
+date: "2024-05-05"
+categories: [r, tidyverse, data-analytics, health-insurance]
+image: "health-insurance.png"
 
 execute: 
   warning: false
@@ -33,66 +33,61 @@ theme_set(theme_ipsum()+
           )
 ```
 
-Let's analyze the `starwars` data:
+Let's analyze the `health_ins` data:
 
 ```{r}
-starwars <- read_csv("https://bcdanl.github.io/data/starwars.csv")
+#| echo: true
+library(tidyverse)
+library(skimr)
+mpg
+health_cust <- read_csv(
+  'https://bcdanl.github.io/data/custdata_rev.csv'
+)
 ```
 
 
+## Variable Description for `health_ins` data.frame
+
+The following describes the variables in the `health_ins` data.frame.
+
+- `custid`: ID of customer
+- `sex`: Sex
+- `is_employed`: Employment status
+  - `NA`: Unknown or not applicable
+  - `TRUE`: Employed
+  - `FALSE`: Unemployed
+- `income`: Income (in $)
+- `marital_status`: Marital status
+- `housing_type`: Housing type
+- `recent_move`: 
+  - `TRUE`: Recently moved
+  - `FALSE`: Not recently moved
+- `age`: Age
+- `state_of_res`: State of residence
+- `gas_usage`: Gas usage
+  - `NA`: Unknown or not applicable
+  - `001`: Included in rent or condo fee
+  - `002`: Included in electricity payment
+  - `003`: No charge or gas not used
+  - `004`-`999`: $4 to $999 (rounded and top-coded)
+- `health_ins`: Health insuarance status
+  - `TRUE`: customer with health insuarance 
+  - `FALSE`: customer without health insuarance 
+
+## Marital Status and Health Insurance 
+
 ```{r}
-#| results: asis
-rmarkdown::paged_table(starwars) 
+health_cust2 <- filter(health_cust, age > 0, age < 100, income > 0)
 ```
 
 
 
-## Variable Description for `starwars` data.frame
-
-The following describes the variables in the `starwars` data.frame.
-
-
-- `films`
-List of films the character appeared in
-
-- `name`
-Name of the character
-
-- `species`
-Name of species
-
-- `height`
-Height (cm)
-
-- `mass`
-Weight (kg)
-
-- `hair_color`, `skin_color`, `eye_color`
-Hair, skin, and eye colors
-
-- `birth_year`
-Year born (BBY = Before Battle of Yavin)
-
-- `sex`
-The biological sex of the character, namely male, female, hermaphroditic, or none (as in the case for Droids).
-
-- `gender`
-The gender role or gender identity of the character as determined by their personality or the way they were programmed (as in the case for Droids).
-
-- `homeworld`
-Name of homeworld
-
-
-## Human vs. Droid
-
 ```{r}
-ggplot(data = 
-         starwars %>% 
-         filter(species %in% c("Human", "Droid"))) +
-  geom_boxplot(aes(x = species, y = mass, 
-                   fill = species),
-               show.legend = FALSE)
+ggplot(data = health_cust2) +
+  geom_bar(mapping = 
+             aes(x = marital_status,
+                 fill = health_ins),
+           position = "dodge")
 
+# Within all marital status categories, there are more customers without health insurance then there are with health insurance. That being said, there are approximately 320,000 married customers without health insurance and 20,000 with health insurance. Approximately, 150,000 never married customers without health insurance and 30,000 with health insurance. For widowed customer, there is approximately 5000 customers without health insurance, and less than 500 customers with health insurance. Lastly. there is approximately 9000 divorced/separated customers without health insurance and 1000 customers with health insurance. 
 ```
-
-
