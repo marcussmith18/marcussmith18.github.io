@@ -1,9 +1,9 @@
 ---
-title: "Health Insurance"
-author: "Marcus Smith"
-date: "2024-05-05"
+title: Health Insurance
+author: Marcus Smith
+date: 2024-05-05
 categories: [r, tidyverse, data-analytics, health-insurance]
-image: "health-insurance.png"
+image: health-insurance.png
 
 execute: 
   warning: false
