@@ -1,0 +1,96 @@
+---
+title: Spotify Playlists
+author: Marcus Smith
+date: 2024-05-012
+categories: [r, tidyverse, data-analytics, Spotify]
+image: spotify.png
+
+execute: 
+  warning: false
+  message: false
+  
+toc: true
+---
+```{r}
+#| include: false
+
+library(knitr)
+library(rmarkdown)
+library(tidyverse)
+library(skimr)
+library(ggthemes)
+library(hrbrthemes)
+
+theme_set(theme_ipsum()+
+          theme(strip.background =element_rect(fill="lightgray"),
+                axis.title.x  = element_text(angle = 0,
+                                            size = rel(1.5),
+                                            margin = margin(10,0,0,0)),
+                axis.title.y  = element_text(angle = 0,
+                                            size = rel(1.5),
+                                            margin = margin(0,10,0,0))
+                )
+          )
+```
+
+Let's analyze the `spotify_all` data:
+
+```{r}
+#| echo: true
+#| eval: true
+#| warning: false
+#| message: false
+spotify_all <- read_csv('https://bcdanl.github.io/data/spotify_all.csv')
+```
+
+```{r}
+#| echo: false
+#| eval: true
+rmarkdown::paged_table(spotify_all)
+```
+
+<br>
+
+The data.frame `spotify_all` includes information about Spotify users' playlists.
+
+  - The unit of observation in `spotify_all` is a track in a music playlist.
+
+<br>
+
+## Variable Description
+
+- `pid`: playlist ID; unique ID for playlist
+  
+- `playlist_name`: a name of playlist
+  
+- `pos`: a position of the track within a playlist (starting from 0)
+  
+- `artist_name`: name of the track's primary artist
+  
+- `track_name`: name of the track
+  
+- `duration_ms`: duration of the track in milliseconds
+  
+- `album_name`: name of the track's album
+
+## The Top 10 Popular Artist, and Their Position on Spotify Playlists
+
+
+```{r}
+#| fig-height: 12
+top10_artist <- spotify_all |>
+  select(artist_name) |> 
+    count(artist_name) |> 
+  slice_max(n, n = 10) 
+
+top10_artist_and_pos <- spotify_all |> 
+   filter(artist_name %in% top10_artist$artist_name) 
+
+ggplot(top10_artist_and_pos,
+       aes(x = pos)) +
+  geom_histogram()+
+  facet_grid(artist_name ~ .)
+
+```
+
+#Most of the top 10 artist's songs are positioned in the first 50 songs in a playlist, and Drake in particular has most of his songs positioned in the first 25 songs of the playlists we observed. This could also be because he has the most songs out of any of the top 10 artists. 

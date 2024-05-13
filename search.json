@@ -158,7 +158,7 @@
     "href": "blog-listing.html",
     "title": "Insightful Analytics",
     "section": "",
-    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nHealth Insurance\n\n\n\n\n\n\n\n\n\nMay 5, 2024\n\n\nMarcus Smith\n\n\n3 min\n\n\n\n\n\n\n  \n\n\n\n\nBeer Markets\n\n\n\n\n\n\n\n\n\nNov 2, 2023\n\n\nByeong-Hak Choe\n\n\n9 min\n\n\n\n\n\n\n  \n\n\n\n\nStarwars\n\n\n\n\n\n\n\n\n\nOct 30, 2023\n\n\nYour Name\n\n\n3 min\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\n\nOct 30, 2023\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\n\nOct 27, 2023\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n  \n\n\n\n\nSpotify Playlists\n\n\n\n\n\n\n\n\n\nMay 12, 2024\n\n\nMarcus Smith\n\n\n3 min\n\n\n\n\n\n\n  \n\n\n\n\nHealth Insurance\n\n\n\n\n\n\n\n\n\nMay 5, 2024\n\n\nMarcus Smith\n\n\n3 min\n\n\n\n\n\n\n  \n\n\n\n\nBeer Markets\n\n\n\n\n\n\n\n\n\nNov 2, 2023\n\n\nByeong-Hak Choe\n\n\n9 min\n\n\n\n\n\n\n  \n\n\n\n\nStarwars\n\n\n\n\n\n\n\n\n\nOct 30, 2023\n\n\nYour Name\n\n\n3 min\n\n\n\n\n\n\n  \n\n\n\n\nPost With Code\n\n\n\n\n\n\n\n\n\nOct 30, 2023\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\n  \n\n\n\n\nWelcome To My Blog\n\n\n\n\n\n\n\n\n\nOct 27, 2023\n\n\nYOUR NAME\n\n\n1 min\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "index.html",
@@ -236,5 +236,26 @@
     "title": "Health Insurance",
     "section": "Marital Status and Health Insurance",
     "text": "Marital Status and Health Insurance\n\nhealth_cust2 &lt;- filter(health_cust, age &gt; 0, age &lt; 100, income &gt; 0)\n\n\nggplot(data = health_cust2) +\n  geom_bar(mapping = \n             aes(x = marital_status,\n                 fill = health_ins),\n           position = \"dodge\")\n\n\n\n# Within all marital status categories, there are more customers without health insurance then there are with health insurance. That being said, there are approximately 320,000 married customers without health insurance and 20,000 with health insurance. Approximately, 150,000 never married customers without health insurance and 30,000 with health insurance. For widowed customer, there is approximately 5000 customers without health insurance, and less than 500 customers with health insurance. Lastly. there is approximately 9000 divorced/separated customers without health insurance and 1000 customers with health insurance."
+  },
+  {
+    "objectID": "posts/Spotify-all/spotify-all.html",
+    "href": "posts/Spotify-all/spotify-all.html",
+    "title": "Spotify Playlists",
+    "section": "",
+    "text": "Let’s analyze the spotify_all data:\nspotify_all &lt;- read_csv('https://bcdanl.github.io/data/spotify_all.csv')\nThe data.frame spotify_all includes information about Spotify users’ playlists."
+  },
+  {
+    "objectID": "posts/Spotify-all/spotify-all.html#variable-description",
+    "href": "posts/Spotify-all/spotify-all.html#variable-description",
+    "title": "Spotify Playlists",
+    "section": "Variable Description",
+    "text": "Variable Description\n\npid: playlist ID; unique ID for playlist\nplaylist_name: a name of playlist\npos: a position of the track within a playlist (starting from 0)\nartist_name: name of the track’s primary artist\ntrack_name: name of the track\nduration_ms: duration of the track in milliseconds\nalbum_name: name of the track’s album"
+  },
+  {
+    "objectID": "posts/Spotify-all/spotify-all.html#the-top-10-popular-artist-and-their-position-on-spotify-playlists",
+    "href": "posts/Spotify-all/spotify-all.html#the-top-10-popular-artist-and-their-position-on-spotify-playlists",
+    "title": "Spotify Playlists",
+    "section": "The Top 10 Popular Artist, and Their Position on Spotify Playlists",
+    "text": "The Top 10 Popular Artist, and Their Position on Spotify Playlists\n\ntop10_artist &lt;- spotify_all |&gt;\n  select(artist_name) |&gt; \n    count(artist_name) |&gt; \n  slice_max(n, n = 10) \n\ntop10_artist_and_pos &lt;- spotify_all |&gt; \n   filter(artist_name %in% top10_artist$artist_name) \n\nggplot(top10_artist_and_pos,\n       aes(x = pos)) +\n  geom_histogram()+\n  facet_grid(artist_name ~ .)\n\n\n\n\n#Most of the top 10 artist’s songs are positioned in the first 50 songs in a playlist, and Drake in particular has most of his songs positioned in the first 25 songs of the playlists we observed. This could also be because he has the most songs out of any of the top 10 artists."
   }
 ]
